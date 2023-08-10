@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import playerService from '../services/players'
 
-const PlayerForm = ({ onSubmit, onClickLogout }) => {  
+const PlayerForm = ({ onSubmit }) => {  
   const [newName, setNewName] = useState('')
   const [newBirthday, setNewBirthday] = useState('')
   const [newPosition, setNewPosition] = useState('')
@@ -42,8 +42,7 @@ const PlayerForm = ({ onSubmit, onClickLogout }) => {
           <div>Player name: <input type="text" onChange={handleInputPlayerName} value={newName} /></div>
           <div>Player birthday: <input type="text" onChange={handleInputPlayerBirthday} value={newBirthday} /></div>
           <div>Player position: <input type="text" onChange={handleInputPlayerPosition} value={newPosition} /></div>
-          <div><button>Add Player</button>
-          <button onClick={onClickLogout}>Logout</button></div>
+          <div><button>Add Player</button></div>
         </form>
       </div>
   )
