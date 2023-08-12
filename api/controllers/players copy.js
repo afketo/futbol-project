@@ -10,7 +10,7 @@ const getTokenExtractUser = require('../middleware/getTokenExtractUser')
 // 		})
 // })
 
-playersRouter.get('/', getTokenExtractUser, async (req, res) => {
+playersRouter.get('/', async (req, res) => {
 	const players = await Player.find({}).populate('user', {
 		username: 1,
 		name: 1
@@ -95,7 +95,7 @@ playersRouter.delete('/:id', async (req, res, next) => {
 // 		.catch(next)
 // })
 
-playersRouter.put('/:id', getTokenExtractUser, async (req, res, next) => {
+playersRouter.put('/:id', async (req, res, next) => {
 	const {id} = req.params
 	const player = req.body
 
@@ -120,14 +120,16 @@ playersRouter.put('/:id', getTokenExtractUser, async (req, res, next) => {
 	}
 })
 
-playersRouter.post('/', getTokenExtractUser, async (req, res, next) => {
+playersRouter.post('/', async (req, res, next) => {
 	try {
-		const { userId } = req
 		const {
 			name, 
 			position, 
-			birthday
+			birthday,
+			userId
 		} = req.body
+
+		if (!userId) return res.status(401).end() // Cambiar status e indicar que falta el userId
 
 		
 		const user = await User.findById(userId)
@@ -142,20 +144,20 @@ playersRouter.post('/', getTokenExtractUser, async (req, res, next) => {
 			name: name,
 			position: position,
 			birthday: birthday,
-			user: user._id
+			user: user.id
 		})
 
-		newPlayer.save()
-			.then(savedPlayer => {
-				user.players = user.players.concat(savedPlayer._id) // Al usuario que hemos recuperado, le agregamos la ID del jugador
-				user.save()
-					.then(
-						res.status(201).json(savedPlayer)
-					)
-			})
+		// newPlayer.save()
+		// 	.then(savedPlayer => {
+		// 		user.players = user.players.concat(savedPlayer._id) // Al usuario que hemos recuperado, le agregamos la ID del jugador
+		// 		user.save()
+		// 			.then(
+		// 				res.status(201).json(savedPlayer)
+		// 			)
+		// 	})
 
-		// const savedPlayer = await newPlayer.save()
-		// res.status(201).json(savedPlayer)
+		const savedPlayer = await newPlayer.save()
+		res.status(201).json(savedPlayer)
 	}
 	catch (err) {
 		next(err)

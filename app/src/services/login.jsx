@@ -7,4 +7,15 @@ const login = async (loginObject) => {
     return data
 }
 
-export default { login }
+const verifyToken = async (token) => {
+    const config = {
+        headers: {
+            Authorization: token
+        }
+    }
+    const { data } = await axios.get(baseUrl, config)
+    // return req.then(res => res.data)
+    return data
+}
+
+export default { login, verifyToken }

@@ -1,10 +1,10 @@
 POST http://localhost:3001/api/players
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY0ZDI5NGJjYjIxOTZkMWRhMWZlNjAxMyIsInVzZXJuYW1lIjoiYWZrZXRvIiwiaWF0IjoxNjkxNTMyNDkzLCJleHAiOjE2OTE2MTg4OTN9.ftDDYiu9fEw3f88UD00wog2Y1KR8eJcu9iTp1w3Ckdk
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY0ZDY3ZGU4MzY0ZDUzYmQ3MTA2ZDhlNCIsInVzZXJuYW1lIjoiYWZrZXRvIiwiaWF0IjoxNjkxNzc4NTUyLCJleHAiOjE2OTE4NjQ5NTJ9.y2n46ZI5_efSBOGjySLGv0a7wVK0Rd_b-bJySpmUrPQ
 
 {
-    "name": "Test5",
-    "position": "Test5",
+    "name": "Jugador2",
+    "position": "Delantero",
     "birthday": "1992-04-22"
 }
 

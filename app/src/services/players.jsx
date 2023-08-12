@@ -1,17 +1,34 @@
 import axios from 'axios'
 const baseUrl = '/api/players'
 
-let token = null
+// let token = null
 
-const setToken = newToken => {
-    token = `Bearer ${newToken}`
+// const setToken = newToken => {
+//     token = `Bearer ${newToken}`
+// }
+
+
+const getAll = (token) => {
+    const config = {
+        headers: {
+            Authorization: token
+        }
+    }
+    const req = axios.get(baseUrl, config)
+    return req.then(res => (res.data))
 }
-const getAll = () => {
-    const req = axios.get(baseUrl)
+
+const getPlayer = (id, token) => {
+    const config = {
+        headers: {
+            Authorization: token
+        }
+    }
+    const req = axios.get(`${baseUrl}/${id}`, config)
     return req.then(res => res.data)
 }
 
-const create = (newObject) => {
+const create = (newObject, token) => {
     const config = {
         headers: {
             Authorization: token
@@ -26,4 +43,4 @@ const update = (id, newObject) => {
     return req.then(res => res.data)
 }
 
-export default { getAll, create, update, setToken }
+export default { getAll, create, update, getPlayer }

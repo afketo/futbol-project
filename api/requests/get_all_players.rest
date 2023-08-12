@@ -1,1 +1,2 @@
 GET http://localhost:3001/api/players
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY0ZDY3ZGU4MzY0ZDUzYmQ3MTA2ZDhlNCIsInVzZXJuYW1lIjoiYWZrZXRvIiwiaWF0IjoxNjkxODQzMTUxLCJleHAiOjE2OTE5Mjk1NTF9._nlrVfYytCCu7Ll-F3uPb4glp8p9e2-VrtvegunIx0g
