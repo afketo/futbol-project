@@ -1,11 +1,11 @@
 POST http://localhost:3001/api/players
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY0ZDY3ZGU4MzY0ZDUzYmQ3MTA2ZDhlNCIsInVzZXJuYW1lIjoiYWZrZXRvIiwiaWF0IjoxNjkxNzc4NTUyLCJleHAiOjE2OTE4NjQ5NTJ9.y2n46ZI5_efSBOGjySLGv0a7wVK0Rd_b-bJySpmUrPQ
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY0ZDdkMmViZGVjMjk3OGQzNzFhOTg1ZiIsImlhdCI6MTY5MTg4NTY5MSwiZXhwIjoxNjkxOTcyMDkxfQ.7uOQNMhZe_saV13u8EYrAJBOZ-CJ6FfLmogtyBZ4r9o
 
 {
-    "name": "Jugador2",
-    "position": "Delantero",
-    "birthday": "1992-04-22"
+    "name": "Pepe",
+    "position": "Portero",
+    "birthday": "2000-02-25"
 }
 
 ###

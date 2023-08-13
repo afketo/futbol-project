@@ -1,7 +1,9 @@
 import dateFormat from "dateformat";
-import { Card, CardFooter, Image } from "@nextui-org/react";
 import { useAuthHeader } from "react-auth-kit";
 import {
+  Card,
+  CardFooter,
+  Image,
   Modal,
   ModalContent,
   ModalHeader,
@@ -16,51 +18,44 @@ import ProfilePicture from "../../assets/images/default_player.png";
 import { useState } from "react";
 
 const Players = ({ players }) => {
-  const [ player, setPlayer ] = useState({})
+  const [player, setPlayer] = useState({});
   const { isOpen, onOpen, onOpenChange } = useDisclosure();
   const token = useAuthHeader();
 
   const handleOnClick = async (id) => {
     try {
       const playerObject = await playerService.getPlayer(id, token());
-      setPlayer(playerObject)
-      onOpen()
-
+      setPlayer(playerObject);
+      onOpen();
     } catch (err) {
       console.log(err);
     }
-    
-    return (
-      <>
-        
-      </>
-    );
   };
 
   return (
     <div className="grid 2xl:grid-cols-4 lg:grid-cols-3 sm:grid-cols-2 mx-2">
       <Modal isOpen={isOpen} onOpenChange={onOpenChange}>
-          <ModalContent>
-            {(onClose) => (
-              <>
-                <ModalHeader className="flex flex-col gap-1">
-                  {player.name}
-                </ModalHeader>
-                <ModalBody>
-                  <p>Abriendo la ficha de {player.name}</p>
-                </ModalBody>
-                <ModalFooter>
-                  <Button color="danger" variant="light" onClick={onClose}>
-                    Close
-                  </Button>
-                  <Button color="primary" onPress={onClose}>
-                    Editar
-                  </Button>
-                </ModalFooter>
-              </>
-            )}
-          </ModalContent>
-        </Modal>
+        <ModalContent>
+          {(onClose) => (
+            <>
+              <ModalHeader className="flex flex-col gap-1">
+                {player.name}
+              </ModalHeader>
+              <ModalBody>
+                <p>Abriendo la ficha de {player.name}</p>
+              </ModalBody>
+              <ModalFooter>
+                <Button color="danger" variant="light" onClick={onClose}>
+                  Close
+                </Button>
+                <Button color="primary" onPress={onClose}>
+                  Editar
+                </Button>
+              </ModalFooter>
+            </>
+          )}
+        </ModalContent>
+      </Modal>
       {players.map((player) => (
         <Card
           key={player.id}

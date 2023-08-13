@@ -3,59 +3,33 @@ import { useAuthHeader } from "react-auth-kit";
 import {
   Card,
   CardFooter,
-  Image,
-  Modal,
-  ModalContent,
-  ModalHeader,
-  ModalBody,
-  ModalFooter,
-  Button,
-  useDisclosure,
+  Image
 } from "@nextui-org/react";
 
 import playerService from "../../services/players";
 import ProfilePicture from "../../assets/images/default_player.png";
 import { useState } from "react";
+import PlayerModal from "./PlayerModal";
 
 const Players = ({ players }) => {
   const [player, setPlayer] = useState({});
-  const { isOpen, onOpen, onOpenChange } = useDisclosure();
   const token = useAuthHeader();
 
   const handleOnClick = async (id) => {
     try {
       const playerObject = await playerService.getPlayer(id, token());
       setPlayer(playerObject);
-      onOpen();
     } catch (err) {
+      // TODO Error handling
       console.log(err);
     }
   };
 
   return (
-    <div className="grid 2xl:grid-cols-4 lg:grid-cols-3 sm:grid-cols-2 mx-2">
-      <Modal isOpen={isOpen} onOpenChange={onOpenChange}>
-        <ModalContent>
-          {(onClose) => (
-            <>
-              <ModalHeader className="flex flex-col gap-1">
-                {player.name}
-              </ModalHeader>
-              <ModalBody>
-                <p>Abriendo la ficha de {player.name}</p>
-              </ModalBody>
-              <ModalFooter>
-                <Button color="danger" variant="light" onClick={onClose}>
-                  Close
-                </Button>
-                <Button color="primary" onPress={onClose}>
-                  Editar
-                </Button>
-              </ModalFooter>
-            </>
-          )}
-        </ModalContent>
-      </Modal>
+    <div className="grid 2xl:grid-cols-4 lg:grid-cols-3 sm:grid-cols-2 mx-2">     
+
+      <PlayerModal player={player}/>
+
       {players.map((player) => (
         <Card
           key={player.id}
