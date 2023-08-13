@@ -44,16 +44,14 @@ const Players = ({ players }) => {
             className="object-cover mb-5 pt-1"
             width={200}
             src={ProfilePicture}
-            slots="entro"
           />
           <CardFooter
-            slots="entro"
             className="before:bg-white/10 border-white/20 border-1 overflow-hidden py-1 absolute before:rounded-xl rounded-large bottom-1 w-[calc(100%_-_8px)] shadow-small z-10"
           >
-            <small className="mr-auto w-1/3">
+            <small className="mr-auto w-min">
               {dateFormat(player.birthday, "dd/mm/yyyy")}
             </small>
-            <strong className="w-1/3">{player.name}</strong>
+            <strong>{player.name}</strong>
             <small className="ml-auto" style={{ color: "red" }}>
               {player.position}
             </small>

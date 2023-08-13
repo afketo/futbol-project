@@ -103,16 +103,10 @@ playersRouter.put('/:id', getTokenExtractUser, async (req, res, next) => {
 	if (Object.keys(player).length === 0) 
 		return res.status(400).json({error: 'Body not valid'})
 
-	const newNoteUpdate = {
-		name: player.name,
-		position: player.position,
-		birthday: player.birthday
-	}
-
 	try{
-		const player = await Player.findByIdAndUpdate(id, newNoteUpdate, { new: true})
-		player
-			? res.json(player)
+		const playerUpdated = await Player.findByIdAndUpdate(id, player, { new: true})
+		playerUpdated
+			? res.json(playerUpdated)
 			: res.status(404).end()
 	}
 	catch(err) {

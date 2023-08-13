@@ -1,0 +1,15 @@
+export const INITIAL_PLAYER_MODEL = {
+    name: '',
+    firstname: '',
+    lastname: '',
+    alias: '',
+    card_identificacion: '',
+    photo: '',
+    birthday: '',
+    birthplace: '',
+    nationality: '',
+    club: '',
+    club_start: '',
+    club_end: '',
+    club_previous: '',
+  }

@@ -38,8 +38,13 @@ const create = (newObject, token) => {
     return req.then(res => res.data)
 }
 
-const update = (id, newObject) => {
-    const req = axios.put(`${baseUrl}/${id}`, newObject)
+const update = (id, newObject, token) => {
+    const config = {
+        headers: {
+            Authorization: token
+        }
+    }
+    const req = axios.put(`${baseUrl}/${id}`, newObject, config)
     return req.then(res => res.data)
 }
 
