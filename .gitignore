@@ -1,4 +1,5 @@
 node_modules
 .env
 .env.development 
-api/public/images
+api/public
+api\public
