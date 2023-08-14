@@ -12,10 +12,11 @@ import {
   Image,
 } from "@nextui-org/react";
 
+import { UserIcon } from '../../assets/icons/UserIcon'
 import useEscapeFirstRender from "../hooks/useEscapeFirstRender";
 import playerService from "../../services/players";
 
-const PlayerModal = ({ player, handlePlayerUpdated }) => {
+const PlayerModal = ({ player, handlePlayerUpdated, handlePlayerRemoved }) => {
   const token = useAuthHeader();
   const { isOpen, onOpen, onOpenChange, onClose } = useDisclosure();
   const [playerObject, setPlayerObject] = useState({});
@@ -103,6 +104,15 @@ const PlayerModal = ({ player, handlePlayerUpdated }) => {
     setIsDragging(false);
     setProfilePicture({});
   };
+
+  // * Maneja el borrado de jugador
+  const handleRemoveInput = async (id) => {
+    const removedPlayer = await playerService.remove(id)
+    if (removedPlayer === 204) {
+      handlePlayerRemoved(id)
+      onClose(); // Cerramos Modal
+    }
+  }
 
   // * Maneja el submit
   const handleSubmit = async (event) => {
@@ -294,6 +304,9 @@ const PlayerModal = ({ player, handlePlayerUpdated }) => {
               <ModalFooter>
                 <Button color="danger" variant="light" onClick={onClose}>
                   Close
+                </Button>
+                <Button color="danger" variant="bordered" onClick={() => handleRemoveInput(playerObject.id)} startContent={<UserIcon />}>
+                  Borrar
                 </Button>
                 <Button color="primary" type="submit">
                   Actualizar

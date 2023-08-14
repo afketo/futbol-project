@@ -119,6 +119,7 @@ const PlayerModalAdd = ({ isActive, handlePlayerUpdated }) => {
         formData, // ! Enviamos el form de la imagen
         token()
       );
+      console.log('created player...', createdPlayer);
 
       setPlayerObject(INITIAL_PLAYER_MODEL)
       setIsDragging(false);

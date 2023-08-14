@@ -14,7 +14,7 @@ import playerService from "../../services/players";
 import { useState } from "react";
 import PlayerModal from "./PlayerModal";
 
-const Players = ({ players, handlePlayerUpdated }) => {
+const Players = ({ players, handlePlayerUpdated, handlePlayerRemoved }) => {
   const [clicked, isClicked] = useState(false);
 
   const [player, setPlayer] = useState({});
@@ -42,12 +42,17 @@ const Players = ({ players, handlePlayerUpdated }) => {
     handlePlayerUpdated(newPlayerObject);
   };
 
+  const handlePlayerRemovedByModal = (deletedPlayerId) => {
+    handlePlayerRemoved(deletedPlayerId);
+  }
+
   return (
     <>
       <div className="grid 2xl:grid-cols-4 lg:grid-cols-3 sm:grid-cols-2 mx-2">
         <PlayerModal
           player={player}
           handlePlayerUpdated={handlePlayerUpdatedByModal}
+          handlePlayerRemoved={handlePlayerRemovedByModal}
         />
         <PlayerModalAdd
           isActive={clicked}

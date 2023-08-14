@@ -33,6 +33,12 @@ const Player = () => {
     setPlayers([newPlayerObject, ...updatedPlayer]);
   };
 
+  const handlePlayerRemoved = (deletedPlayerId) => {
+    setPlayers(players.filter(player => {
+      if (player.id !== deletedPlayerId) return player
+    }))
+  }
+
   players.sort((a, b) => {
     const nameA = a.name.toUpperCase(); // ignore upper and lowercase
     const nameB = b.name.toUpperCase(); // ignore upper and lowercase
@@ -49,7 +55,7 @@ const Player = () => {
       <h1>Añadir jugador</h1>
       {/* <PlayerForm onSubmit={setPlayerObject} /> */}
       <h1>Jugadores</h1>
-      <PlayersCard players={players} handlePlayerUpdated={handlePlayerUpdated} />
+      <PlayersCard players={players} handlePlayerUpdated={handlePlayerUpdated} handlePlayerRemoved={handlePlayerRemoved} />
 
       {/* // TODO activar switch para hacer modo card|tabla
         <div className="flex justify-center items-center mb-5">
