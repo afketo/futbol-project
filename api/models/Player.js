@@ -7,7 +7,7 @@ const playerSchema = new Schema({
 	lastname: String,
 	alias: String,
 	card_identificacion: String,
-	photo: String,
+	picture: String,
 	birthday: Date,
 	birthplace: String,
 	nationality: String,
@@ -59,7 +59,7 @@ playerSchema.set('toJSON', {
 	transform: (document, returnedObject) => {
 		returnedObject.id = returnedObject._id
 		// returnedObject.birthday = returnedObject.birthday.toLocaleDateString()
-		returnedObject.birthday = (returnedObject.birthday.toJSON()).split('T')[0]
+		if (returnedObject.birthday) returnedObject.birthday = (returnedObject.birthday.toJSON()).split('T')[0]
 		// returnedObject.birthday = (
 		// 	returnedObject.birthday.getDate()
 		// 	+ '-' + returnedObject.birthday.getMonth()

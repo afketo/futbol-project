@@ -34,6 +34,7 @@ Sentry.init({
 app.use(Sentry.Handlers.requestHandler())
 app.use(Sentry.Handlers.tracingHandler())
 app.use(express.static('../app/dist'))
+app.use(express.static('./public'))
 
 app.use(cors())
 app.use(express.json())

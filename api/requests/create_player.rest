@@ -1,11 +1,21 @@
 POST http://localhost:3001/api/players
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY0ZDdkMmViZGVjMjk3OGQzNzFhOTg1ZiIsImlhdCI6MTY5MTg4NTY5MSwiZXhwIjoxNjkxOTcyMDkxfQ.7uOQNMhZe_saV13u8EYrAJBOZ-CJ6FfLmogtyBZ4r9o
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY0ZDdkMmViZGVjMjk3OGQzNzFhOTg1ZiIsImlhdCI6MTY5MjAwODAwOCwiZXhwIjoxNjkyMDExNjA4fQ.xc7SyDZ6Hgg1GUE4_5Es50UXiUVI85I2V3x6y8cnrlc
 
 {
-    "name": "Pepe",
-    "position": "Portero",
-    "birthday": "2000-02-25"
+  "name": "Angel",
+  "firstname": "Garcia",
+  "lastname": "",
+  "alias": "",
+  "card_identificacion": "",
+  "picture": "",
+  "birthday": "",
+  "birthplace": "",
+  "nationality": "",
+  "club": "",
+  "club_start": "",
+  "club_end": "",
+  "club_previous": ""
 }
 
 ###

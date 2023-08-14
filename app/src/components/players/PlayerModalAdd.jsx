@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useAuthHeader } from "react-auth-kit";
 import {
   Modal,
@@ -14,20 +14,20 @@ import {
 
 import useEscapeFirstRender from "../hooks/useEscapeFirstRender";
 import playerService from "../../services/players";
+import { INITIAL_PLAYER_MODEL } from './Constants'
 
-const PlayerModal = ({ player, handlePlayerUpdated }) => {
+const PlayerModalAdd = ({ isActive, handlePlayerUpdated }) => {
   const token = useAuthHeader();
   const { isOpen, onOpen, onOpenChange, onClose } = useDisclosure();
-  const [playerObject, setPlayerObject] = useState({});
+  const [playerObject, setPlayerObject] = useState(INITIAL_PLAYER_MODEL);
   const [profilePicture, setProfilePicture] = useState({});
   const [image, setImage] = useState()
   const [isDragging, setIsDragging] = useState(false);
 
   // * Renderiza los cards con la información de los jugadores
   useEscapeFirstRender(() => {
-    setPlayerObject({ ...playerObject, ...player });
     onOpen();
-  }, player);
+  }, isActive);
 
   // * Recoge los inputs del Modal y los guarda en playerObject
   const handleInput = (event) => {
@@ -110,24 +110,24 @@ const PlayerModal = ({ player, handlePlayerUpdated }) => {
     
     const formData = new FormData() // ! PARA LA IMAGEN DEL PLAYER
     formData.append('image', image) // ! PARA LA IMAGEN DEL PLAYER
-    formData.append('id', playerObject.id) // ! PARA LA IMAGEN DEL PLAYER
+    // formData.append('id', playerObject.id) // ! PARA LA IMAGEN DEL PLAYER
     
     try {
-      const updatedPlayer = await playerService.update(
-        playerObject.id,
+      const createdPlayer = await playerService.create(
         playerObject,
         isDragging, // ! Indicamos a la api que tenemos una imagen nueva
         formData, // ! Enviamos el form de la imagen
         token()
       );
 
-      onClose(); // Cerramos Modal
-      handlePlayerUpdated(updatedPlayer); // Enviamos a PlayersCard la nueva info del jugador
+      setPlayerObject(INITIAL_PLAYER_MODEL)
       setIsDragging(false);
       setProfilePicture({});
+      handlePlayerUpdated(createdPlayer); // Enviamos a PlayersCard la nueva info del jugador
+      onClose(); // Cerramos Modal
     } catch (err) {
       // TODO handling error
-      console.log("error updating: ", err);
+      console.log("error creating player: ", err);
     }
   };
 
@@ -144,8 +144,8 @@ const PlayerModal = ({ player, handlePlayerUpdated }) => {
           <>
             <form onSubmit={handleSubmit} encType="multipart/form-data">
               <ModalHeader className="flex-col items-center justify-center text-2xl">
-                {player.name} {player.firstname} {player.lastname}
-                <p className="mt-2 text-base font-normal">{player.alias}</p>
+                {playerObject.name} {playerObject.firstname} {playerObject.lastname}
+                <p className="mt-2 text-base font-normal">{playerObject.alias}</p>
               </ModalHeader>
               <ModalBody>
                 <div className="grid grid-cols-5 grid-rows-3 gap-3">
@@ -307,4 +307,4 @@ const PlayerModal = ({ player, handlePlayerUpdated }) => {
   );
 };
 
-export default PlayerModal;
+export default PlayerModalAdd;
