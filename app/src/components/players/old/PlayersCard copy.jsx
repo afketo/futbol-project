@@ -13,7 +13,7 @@ import {
   useDisclosure,
 } from "@nextui-org/react";
 
-import playerService from "../../services/players";
+import playerService from "../../../services/players";
 import ProfilePicture from "../../assets/images/default_player.png";
 import { useState } from "react";
 

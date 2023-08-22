@@ -8,9 +8,9 @@ import {
   getKeyValue,
 } from "@nextui-org/react";
 
-import { EditIcon } from "../../assets/icons/EditIcon";
-import { DeleteIcon } from "../../assets/icons/DeleteIcon";
-import { EyeIcon } from "../../assets/icons/EyeIcon";
+import { EditIcon } from "../../../assets/icons/EditIcon";
+import { DeleteIcon } from "../../../assets/icons/DeleteIcon";
+import { EyeIcon } from "../../../assets/icons/EyeIcon";
 import { useState } from "react";
 import { useEffect } from "react";
 

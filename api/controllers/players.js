@@ -171,7 +171,8 @@ playersRouter.post('/', getTokenExtractUser, async (req, res, next) => {
 			club,
 			club_start,
 			club_end,
-			club_previous, 
+			club_previous,
+			position,
 		} = req.body
 
 		const user = await User.findById(userId)
@@ -196,6 +197,7 @@ playersRouter.post('/', getTokenExtractUser, async (req, res, next) => {
 			club_start,
 			club_end,
 			club_previous,
+			position,
 			user: user._id,
 		})
 

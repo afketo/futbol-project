@@ -12,4 +12,5 @@ export const INITIAL_PLAYER_MODEL = {
     club_start: "",
     club_end: "",
     club_previous: "",
+    position: "",
   }

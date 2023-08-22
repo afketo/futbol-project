@@ -44,7 +44,28 @@ const Players = ({ players, handlePlayerUpdated, handlePlayerRemoved }) => {
 
   const handlePlayerRemovedByModal = (deletedPlayerId) => {
     handlePlayerRemoved(deletedPlayerId);
-  }
+  };
+
+  const bgCardFooter = (position) => {
+    const defaultFooter =
+      "border-1 overflow-hidden py-1 absolute before:rounded-xl rounded-large bottom-1 w-[calc(100%_-_8px)] shadow-small z-10 ";
+    const goalkeeperFooter = defaultFooter + "bg-yellow-100";
+    const defenterFooter = defaultFooter + "bg-blue-100";
+    const midfieldFooter = defaultFooter + "bg-green-100";
+    const strikerFooter = defaultFooter + "bg-red-100";
+    switch (position) {
+      case "Portero":
+        return goalkeeperFooter;
+      case "Defensa":
+        return defenterFooter;
+      case "Centrocampista":
+        return midfieldFooter;
+      case "Delantero":
+        return strikerFooter;
+      default:
+        return defaultFooter;
+    }
+  };
 
   return (
     <>
@@ -79,7 +100,7 @@ const Players = ({ players, handlePlayerUpdated, handlePlayerRemoved }) => {
                   : backendUrlImages + "default_player.png"
               }
             />
-            <CardFooter className="before:bg-white/10 border-white/20 border-1 overflow-hidden py-1 absolute before:rounded-xl rounded-large bottom-1 w-[calc(100%_-_8px)] shadow-small z-10">
+            <CardFooter className={bgCardFooter(player.position)}>
               <small className="mr-auto w-min">
                 {dateFormat(player.birthday, "dd/mm/yyyy")}
               </small>

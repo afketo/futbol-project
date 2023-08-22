@@ -11,8 +11,9 @@ import {
   Input,
   Image,
 } from "@nextui-org/react";
+import { Select, SelectItem } from "@nextui-org/select";
 
-import { UserIcon } from '../../assets/icons/UserIcon'
+import { UserIcon } from "../../assets/icons/UserIcon";
 import useEscapeFirstRender from "../hooks/useEscapeFirstRender";
 import playerService from "../../services/players";
 
@@ -21,7 +22,7 @@ const PlayerModal = ({ player, handlePlayerUpdated, handlePlayerRemoved }) => {
   const { isOpen, onOpen, onOpenChange, onClose } = useDisclosure();
   const [playerObject, setPlayerObject] = useState({});
   const [profilePicture, setProfilePicture] = useState({});
-  const [image, setImage] = useState()
+  const [image, setImage] = useState();
   const [isDragging, setIsDragging] = useState(false);
 
   // * Renderiza los cards con la información de los jugadores
@@ -33,6 +34,7 @@ const PlayerModal = ({ player, handlePlayerUpdated, handlePlayerRemoved }) => {
   // * Recoge los inputs del Modal y los guarda en playerObject
   const handleInput = (event) => {
     const { target } = event;
+    console.log(target);
     const targetName = target.name;
     const targetValue = target.value;
 
@@ -57,7 +59,7 @@ const PlayerModal = ({ player, handlePlayerUpdated, handlePlayerRemoved }) => {
       });
 
       // Guardamos la imagen para subirla al  backend
-      setImage(files[0]) // ! PARA LA IMAGEN DEL PLAYER
+      setImage(files[0]); // ! PARA LA IMAGEN DEL PLAYER
     } else {
       // TODO Controlar errores
       console.log("no es una imagen");
@@ -91,7 +93,7 @@ const PlayerModal = ({ player, handlePlayerUpdated, handlePlayerRemoved }) => {
       });
 
       // Guardamos la imagen para subirla al  backend
-      setImage(files[0]) // ! PARA LA IMAGEN DEL PLAYER
+      setImage(files[0]); // ! PARA LA IMAGEN DEL PLAYER
     } else {
       // TODO Controlar errores
       console.log("no es una imagen");
@@ -107,21 +109,21 @@ const PlayerModal = ({ player, handlePlayerUpdated, handlePlayerRemoved }) => {
 
   // * Maneja el borrado de jugador
   const handleRemoveInput = async (id) => {
-    const removedPlayer = await playerService.remove(id)
+    const removedPlayer = await playerService.remove(id);
     if (removedPlayer === 204) {
-      handlePlayerRemoved(id)
+      handlePlayerRemoved(id);
       onClose(); // Cerramos Modal
     }
-  }
+  };
 
   // * Maneja el submit
   const handleSubmit = async (event) => {
     event.preventDefault();
-    
-    const formData = new FormData() // ! PARA LA IMAGEN DEL PLAYER
-    formData.append('image', image) // ! PARA LA IMAGEN DEL PLAYER
-    formData.append('id', playerObject.id) // ! PARA LA IMAGEN DEL PLAYER
-    
+
+    const formData = new FormData(); // ! PARA LA IMAGEN DEL PLAYER
+    formData.append("image", image); // ! PARA LA IMAGEN DEL PLAYER
+    formData.append("id", playerObject.id); // ! PARA LA IMAGEN DEL PLAYER
+
     try {
       const updatedPlayer = await playerService.update(
         playerObject.id,
@@ -300,12 +302,46 @@ const PlayerModal = ({ player, handlePlayerUpdated, handlePlayerRemoved }) => {
                     name="club_previous"
                   />
                 </div>
+                <div>
+                  <hr />
+                  Mas info
+                  <hr />
+                </div>
+                <div className="grid grid-cols-5 grid-rows-3 gap-3">
+                  <Select
+                    variant="underlined"
+                    label="Posición"
+                    className="max-w-xs"
+                    name='position'
+                    selectedKeys={[playerObject.position]}
+                    onChange={handleInput}
+                  >
+                    <SelectItem key="Portero" value="Portero">
+                      Portero
+                    </SelectItem>
+                    <SelectItem key="Defensa" value="Defensa">
+                      Defensa
+                    </SelectItem>
+                    <SelectItem key="Centrocampista" value="Centrocampista">
+                      Centrocampìsta
+                    </SelectItem>
+                    <SelectItem key="Delantero" value="Delantero">
+                      Delantero
+                    </SelectItem>
+                  </Select>
+                </div>
               </ModalBody>
               <ModalFooter>
                 <Button color="danger" variant="light" onClick={onClose}>
-                  Close
+                  Cerrar
                 </Button>
-                <Button color="danger" variant="bordered" onClick={() => handleRemoveInput(playerObject.id)} startContent={<UserIcon />}>
+                <Button
+                  color="danger"
+                  variant="bordered"
+                  onClick={() => handleRemoveInput(playerObject.id)}
+                  startContent={<UserIcon />}
+                  className="hover:bg-red-100"
+                >
                   Borrar
                 </Button>
                 <Button color="primary" type="submit">
